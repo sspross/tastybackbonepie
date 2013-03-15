@@ -37,9 +37,16 @@ pip install django==1.5 django-tastypie==0.9.12
 	)
 	```
 
-
 ## How to use
 
-### django-tastypie Setup
+### django-tastypie example setup
 
 ### Basic table
+
+### HTML fields
+
+### Additional HTML fields
+
+### Column sorting
+
+### Filtering
