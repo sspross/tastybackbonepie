@@ -24,7 +24,7 @@ pip install django==1.5 django-tastypie==0.9.12
 0. Over pip too
 	
 	```
-	pip install tastybackbonepie
+	pip install https://github.com/sspross/tastybackbonepie/zipball/master
 	```
 
 0. Add it to your `INSTALLED_APPS`:
