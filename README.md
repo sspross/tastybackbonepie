@@ -13,7 +13,7 @@ Maybe it works with other versions too, but atm it is tested with:
 - Django 1.5
 - Tastypie 0.9.12
 
-Install over pip
+Install using pip:
 
 ```
 pip install django==1.5 django-tastypie==0.9.12
@@ -21,7 +21,7 @@ pip install django==1.5 django-tastypie==0.9.12
 
 ### Install TastyBackbonePie
 
-0. Over pip too
+0. Using pip too:
 	
 	```
 	pip install https://github.com/sspross/tastybackbonepie/zipball/master
