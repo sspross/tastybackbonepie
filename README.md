@@ -40,9 +40,11 @@ pip install django==1.5 django-tastypie==0.9.12
 
 ## How to use
 
+You can also take a look at the source of the test project.
+
 ### Tastypie example setup
 
-0. Create a Tastypie API ressource e.g. `api.py` like:
+0. Create a Tastypie API ressource in e.g. `api.py` like:
 
 	```python
 	from tastypie import fields
@@ -58,7 +60,7 @@ pip install django==1.5 django-tastypie==0.9.12
 	        fields = ('id', 'name', 'added', 'read')
 	```
 
-0. Add to your `urls.py` file:
+0. Add API to your `urls.py` file:
 
 	```python
 	from tastypie.api import Api
@@ -77,7 +79,7 @@ Now you should be able to access your ressource over your API like `/api/v1/book
 
 ### Basic table
 
-0. asdfasfd
+0. Use `TastyBackbonePieTableHelper` to define your table and add it to your views context:
 
 	```python
 	from django.views.generic import TemplateView
@@ -123,8 +125,16 @@ Now you should be able to access your ressource over your API like `/api/v1/book
 
 ### HTML fields
 
+coming soon...
+
 ### Additional HTML fields
+
+coming soon...
 
 ### Column sorting
 
+coming soon...
+
 ### Filtering
+
+coming soon...
