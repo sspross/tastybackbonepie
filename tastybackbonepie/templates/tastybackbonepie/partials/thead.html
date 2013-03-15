@@ -1,0 +1,16 @@
+<tr>
+	{% for field in fields %}
+    	<th>
+    		{% if field.order_by %}
+    			<a href="#" class="orderBy-{{ id }}" data-order_by="<% if (order_by == '{{ field.order_by }}') { %><%= order_direction %><% } %>{{ field.order_by }}">
+    		{% endif %}
+    		{{ field.label }}
+    		{% if field.order_by %}
+    			</a>
+    		{% endif %}
+    	</th>
+    {% endfor %}
+    {% for field in additional_html_fields %}
+    	<th></th>
+    {% endfor %}
+</tr>

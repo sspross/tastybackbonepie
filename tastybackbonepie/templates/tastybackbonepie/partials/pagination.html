@@ -1,0 +1,7 @@
+<ul>
+	<li<% if (meta.previous == null) { %> class="disabled"<% } %>><a href="#" class="previous-{{ id }}">«</a></li>
+	<% for (var i=0, len=Math.ceil(meta.total_count / meta.limit); i < len; i++) { %>
+	    <li<% if (meta.offset / meta.limit == i) { %> class="active"<% } %>><a href="#" class="page-{{ id }}" data-offset="<%= meta.limit * i  %>"><%= i + 1 %></a></li>
+	<% } %>
+	<li<% if (meta.next == null) { %> class="disabled"<% } %>><a href="#" class="next-{{ id }}">»</a></li>
+</ul>
