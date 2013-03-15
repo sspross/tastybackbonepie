@@ -14,7 +14,9 @@ setup(
     platforms=['OS Independent'],
     packages=[
         'tastybackbonepie',
-        'tastybackbonepie.helpers',
+        'tastybackbonepie.static.tastybackbonepie.javascript',
+        'tastybackbonepie.templates.tastybackbonepie',
+        'tastybackbonepie.templates.tastybackbonepie.partials',
     ],
     classifiers=[
         'Development Status :: 3 - Alpha',
