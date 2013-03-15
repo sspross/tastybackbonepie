@@ -1,0 +1,3 @@
+include README.md
+recursive-include tastybackbonepie/static *.js
+recursive-include tastybackbonepie/templates *.html *.js
