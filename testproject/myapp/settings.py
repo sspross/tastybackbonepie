@@ -125,7 +125,6 @@ INSTALLED_APPS = (
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
     'myapp',
-    'tastybackbonepie',
 )
 
 # A sample logging configuration. The only tangible logging
