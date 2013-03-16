@@ -5,7 +5,7 @@ Includes a way to easily paginate, sort and filter tables too.
 
 __Version 0.1 alpha - This project is in a very early stage.__
 
-![Screenshot](testproject/screenshot.png)
+![Screenshot](screenshot.png)
 
 ## Installation
 
