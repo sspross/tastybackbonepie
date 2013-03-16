@@ -1,24 +1,51 @@
-<link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-combined.min.css" rel="stylesheet">
+<link href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.1/css/bootstrap.min.css" rel="stylesheet">
 
-<label class="checkbox">
-  <input type="checkbox" id="filter-read"> Show unread books only
-</label>
-{{ book_table.render_html }}
+<label class="checkbox"><input type="checkbox" id="filter-read"> Show unread books only</label>
+<div id="book-table"></div>
 
-<script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
-<script type="text/javascript" src="{{ STATIC_URL }}tastybackbonepie/javascript/underscore-min.js"></script>
-<script type="text/javascript" src="{{ STATIC_URL }}tastybackbonepie/javascript/backbone-min.js"></script>
-<script type="text/javascript" src="{{ STATIC_URL }}tastybackbonepie/javascript/backbone-tastypie.js"></script>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.4.4/underscore-min.js"></script>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/backbone.js/0.9.10/backbone-min.js"></script>
+<script type="text/javascript" src="{{ STATIC_URL }}tastybackbonepie/tastybackbonepie-min.js"></script>
 <script type="text/javascript">
-    {{ book_table.render_js }}
+    var book_table_settings = {
+        uid: 'book_table',
+        root_url: '/api/v1/book/',
+        fields: [
+            {
+                'key': 'id',
+                'label': '#',
+            },
+            {
+                'key': 'name',
+                'label': 'Name',
+                'order_by': 'name',
+            },
+            {
+                'key': 'added',
+                'label': 'Added at',
+                'order_by': 'added',
+            },
+            {
+                'key': 'read',
+                'label': 'Read',
+                'template': '<% if (entry.get(\'read\') == true) { %>x<% } %>',
+                'order_by': 'read',
+            },
+        ],
+        additional_html_fields: [
+            '<a class="btn btn-mini" href="#" data-id="<%= entry.get(\'id\') %>"><i class="icon-trash"></i></a>',
+        ]
+    };
+
+    var book_table = $('#book-table').renderTastyBackbonePieTable(book_table_settings);
 
     $('#filter-read').click(function(event){
         if ($(this).is(':checked')) {
-            $.extend({{ book_table.uid }}.parameters, {'read': 'false'});
+            book_table.extend_parameters({'read': 'false'});
         } else {
-            delete {{ book_table.uid }}.parameters.read;
-            delete {{ book_table.uid }}.entries.filters.read;
+            book_table.remove_parameter('read')
         }
-        {{ book_table.uid }}.render();
+        book_table.render();
     });
 </script>

@@ -1,5 +1,7 @@
-// original backbone-tastypie.js by amccloud
-// https://github.com/amccloud/backbone-tastypie/blob/24ed1914f63aa5ec93d4186f9834f269d6c5633e/backbone-tastypie.js
+/*
+    original backbone-tastypie.js by amccloud
+    https://github.com/amccloud/backbone-tastypie/blob/24ed1914f63aa5ec93d4186f9834f269d6c5633e/backbone-tastypie.js
+*/
 (function($, _, Backbone) {
     Backbone.Tastypie = {
         defaultLimit: 20
@@ -10,7 +12,6 @@
 
         url: function() {
             var url = getValue(this, 'urlRoot') || getValue(this.collection, 'urlRoot') || urlError();
-            
             if (this.isNew())
                 return url;
 
