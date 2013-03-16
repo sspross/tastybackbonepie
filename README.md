@@ -1,11 +1,11 @@
 # TastyBackbonePie
 
-jQuery plugin to create ajax data tables with [backbone.js](http://backbonejs.org/) and [django-tastypie](http://tastypieapi.org/).
-Includes a way to easily paginate, sort and filter tables too.
+jQuery plugin to create fancy ajax data tables using a [django-tastypie](http://tastypieapi.org/) api backend.
+Includes a way to easily paginate, sort and filter tables too!
 
 __Version 0.1 alpha - This project is in a very early stage.__
 
-![Screenshot](screenshot.png)
+![Screenshot](docs/screenshot.png)
 
 ## How to use
 
