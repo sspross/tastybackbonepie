@@ -196,12 +196,11 @@ class BookResource(ModelResource):
 
 ### Use own templates
 
-todo...
+Set `template` and/or `template_error` in your settings:
 
 ```javascript
 var book_table_settings = {
     ...
     template = '',
-    template_error
-
+    template_error = ''
 ```
