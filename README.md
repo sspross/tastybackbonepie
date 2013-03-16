@@ -1,48 +1,27 @@
 # TastyBackbonePie
 
-Django helper classes to create ajax data tables with [backbone.js](http://backbonejs.org/) and [django-tastypie](http://tastypieapi.org/).
+jQuery plugin to create ajax data tables with [backbone.js](http://backbonejs.org/) and [django-tastypie](http://tastypieapi.org/).
 Includes a way to easily paginate, sort and filter tables too.
 
 __Version 0.1 alpha - This project is in a very early stage.__
 
 ![Screenshot](screenshot.png)
 
-## Installation
+## How to use
+
+You can also take a look at the source of the [django test project](/testproject).
 
 ### Requirements
 
 Maybe it works with other versions too, but atm it is tested with:
 
-- Django 1.5
+#### Javascript
+- jQuery 1.9.1
+- underscore.js 1.4.4
+- backbone.js 0.9.10
+
+#### Django
 - Tastypie 0.9.12
-
-Install using pip:
-
-```bash
-pip install django==1.5 django-tastypie==0.9.12
-```
-
-### Install TastyBackbonePie
-
-0. Using pip too:
-	
-	```bash
-	pip install https://github.com/sspross/tastybackbonepie/zipball/master
-	```
-
-0. Add it to your `INSTALLED_APPS`:
-
-	```python
-	INSTALLED_APPS = (
-		...
-		'tastybackbonepie',
-		...
-	)
-	```
-
-## How to use
-
-You can also take a look at the source of the test project.
 
 ### Tastypie example setup
 
@@ -80,87 +59,66 @@ Now you should be able to access your ressource over your API like `/api/v1/book
 
 ### Basic table
 
-0. Use `TastyBackbonePieTableHelper` to define your table and add it to your views context:
+```html
+<div id="book-table"></div>
 
-	```python
-	from django.views.generic import TemplateView
-	from tastybackbonepie.helpers import TastyBackbonePieTableHelper
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.4.4/underscore-min.js"></script>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/backbone.js/0.9.10/backbone-min.js"></script>
+<script type="text/javascript" src="{{ STATIC_URL }}tastybackbonepie/tastybackbonepie-min.js"></script>
+<script type="text/javascript">
+    var book_table_settings = {
+        uid: 'book_table',
+        root_url: '/api/v1/book/',
+        fields: [
+            {
+                'key': 'id',
+                'label': '#',
+            },
+            {
+                'key': 'name',
+                'label': 'Name',
+            },
+            {
+                'key': 'added',
+                'label': 'Added at',
+            },
+            {
+                'key': 'read',
+                'label': 'Read',
+            }
+        ]
+    };
 
-
-	class BookTable(TastyBackbonePieTableHelper):
-		uid = 'book_table'
-	    root_url = '/api/v1/book/'
-	    fields = [
-	        {
-	            'key': 'id',
-	            'label': '#',
-	        },
-	        {
-	            'key': 'name',
-	            'label': 'Name',
-	        },
-	        {
-	            'key': 'added',
-	            'label': 'Added at',
-	        },
-	        {
-	            'key': 'read',
-	            'label': 'Read',
-	        },
-	    ]
-
-
-	class TestView(TemplateView):
-	    template_name = 'test.html'
-
-	    def get_context_data(self, **kwargs):
-	        context = super(TestView, self).get_context_data(**kwargs)
-	        context['book_table'] = BookTable()
-	        return context
-	```
-
-0. Render HTML and Javascript parts in your template:
-
-	```html
-	<link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-combined.min.css" rel="stylesheet">
-
-	{{ book_table.render_html }}
-
-	<script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
-	<script type="text/javascript" src="{{ STATIC_URL }}tastybackbonepie/javascript/underscore-min.js"></script>
-	<script type="text/javascript" src="{{ STATIC_URL }}tastybackbonepie/javascript/backbone-min.js"></script>
-	<script type="text/javascript" src="{{ STATIC_URL }}tastybackbonepie/javascript/backbone-tastypie.js"></script>
-	<script type="text/javascript">
-	    {{ book_table.render_js }}
-	</script>
-	```
-
+    var book_table = $('#book-table').renderTastyBackbonePieTable(book_table_settings);
+</script>
+```
 
 ### Template fields
 
 Define `template` on a field. You can use underscore template syntax and the `entry` object to access your field values.
 
-```python
-class BookTable(TastyBackbonePieTableHelper):
+```javascript
+var book_table_settings = {
 	...
-	fields = [
+	fields: [
 		...
 	    {
 	        'key': 'read',
 	        'label': 'Read',
 	        'template': '<% if (entry.get(\'read\') == true) { %>x<% } %>',
-	    },
+	    }
 	    ...
 	]
 ```
 
 ### Additional HTML fields
 
-Add `additional_html_fields `to your `TastyBackbonePieTableHelper` class and add string values of html to it. 
+Add `additional_html_fields` to your settings and add string values cointaining html to it. 
 You can use underscore template syntax and the `entry` object to access your field values.
 
-```python
-class BookTable(TastyBackbonePieTableHelper):
+```javascript
+var book_table_settings = {
 	...
 	additional_html_fields = [
 		'<a class="btn" role="button" href="#" data-id="<%= entry.get(\'id\') %>"><i class="icon-trash"></i></a>',
@@ -179,8 +137,8 @@ class BookResource(ModelResource):
         ordering = ('name', 'added', 'read')
 ```
 
-```python
-class BookTable(TastyBackbonePieTableHelper):
+```javascript
+var book_table_settings = {
     ...
     fields = [
         ...
@@ -218,22 +176,20 @@ class BookResource(ModelResource):
 ```
 
 ```html
-<label class="checkbox">
-  <input type="checkbox" id="filter-read"> Show unread books only
-</label>
-{{ book_table.render_html }}
+<label class="checkbox"><input type="checkbox" id="filter-read"> Show unread books only</label>
+<div id="book-table"></div>
 ...
 <script type="text/javascript">
-    {{ book_table.render_js }}
+	...
+    var book_table = $('#book-table').renderTastyBackbonePieTable(book_table_settings);
 
     $('#filter-read').click(function(event){
         if ($(this).is(':checked')) {
-            $.extend({{ book_table.uid }}.parameters, {'read': 'false'});
+            book_table.extend_parameters({'read': 'false'});
         } else {
-            delete {{ book_table.uid }}.parameters.read;
-            delete {{ book_table.uid }}.entries.filters.read;
+            book_table.remove_parameter('read')
         }
-        {{ book_table.uid }}.render();
+        book_table.render();
     });
 </script>
 ```
