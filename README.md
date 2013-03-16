@@ -193,3 +193,15 @@ class BookResource(ModelResource):
     });
 </script>
 ```
+
+### Use own templates
+
+todo...
+
+```javascript
+var book_table_settings = {
+    ...
+    template = '',
+    template_error
+
+```
