@@ -7,7 +7,11 @@ var TastybackbonepieTable{{ id }} = Backbone.View.extend({
     tt: '#tastybackbonepie-table-template-{{ id }}',
     al: '#tastybackbonepie-table-alert-{{ id }}',
     entries: new TastybackbonepieCollection{{ id }}(),
-    parameters: {},
+    parameters: {
+        {% for default_filter in default_filters %}
+            {{ default_filter.key }}: '{{ default_filter.value }}'{% if not forloop.last %},{% endif %}
+        {% endfor %}
+    },
     order_direction: '',
     getFetchOptions: function(){
         var that = this;
@@ -57,9 +61,10 @@ var TastybackbonepieTable{{ id }} = Backbone.View.extend({
     },
     orderBy: function(event){
         event.preventDefault();
-        this.parameters = {
+        var parameters = {
             'order_by': $(event.currentTarget).attr('data-order_by')
         }
+        _.extend(this.parameters, parameters);
         if (this.order_direction != '-') {
             this.order_direction = '-';
         }

@@ -5,6 +5,8 @@ Includes a way to easily paginate, sort and filter tables too.
 
 __Version 0.1 alpha - This project is in a very early stage.__
 
+![Screenshot](screenshot.png)
+
 ## Installation
 
 ### Requirements
@@ -47,7 +49,6 @@ You can also take a look at the source of the test project.
 0. Create a Tastypie API ressource in e.g. `api.py` like:
 
 	```python
-	from tastypie import fields
 	from tastypie.resources import ModelResource
 	from myapp.models import Book
 
@@ -91,8 +92,20 @@ Now you should be able to access your ressource over your API like `/api/v1/book
 	    root_url = '/api/v1/book/'
 	    fields = [
 	        {
+	            'key': 'id',
+	            'label': '#',
+	        },
+	        {
 	            'key': 'name',
 	            'label': 'Name',
+	        },
+	        {
+	            'key': 'added',
+	            'label': 'Added at',
+	        },
+	        {
+	            'key': 'read',
+	            'label': 'Read',
 	        },
 	    ]
 
@@ -123,18 +136,104 @@ Now you should be able to access your ressource over your API like `/api/v1/book
 	```
 
 
-### HTML fields
+### Template fields
 
-coming soon...
+Define `template` on a field. You can use underscore template syntax and the `entry` object to access your field values.
+
+```python
+class BookTable(TastyBackbonePieTableHelper):
+	...
+	fields = [
+		...
+	    {
+	        'key': 'read',
+	        'label': 'Read',
+	        'template': '<% if (entry.get(\'read\') == true) { %>x<% } %>',
+	    },
+	    ...
+	]
+```
 
 ### Additional HTML fields
 
-coming soon...
+Add `additional_html_fields `to your `TastyBackbonePieTableHelper` class and add string values of html to it. 
+You can use underscore template syntax and the `entry` object to access your field values.
+
+```python
+class BookTable(TastyBackbonePieTableHelper):
+	...
+	additional_html_fields = [
+		'<a class="btn" role="button" href="#" data-id="<%= entry.get(\'id\') %>"><i class="icon-trash"></i></a>',
+	]
+	...
+```
 
 ### Column sorting
 
-coming soon...
+Add order fields in your tastypie `ModelResource` and set `order_by` on your fields.
+
+```python
+class BookResource(ModelResource):
+    class Meta:
+        ...
+        ordering = ('name', 'added', 'read')
+```
+
+```python
+class BookTable(TastyBackbonePieTableHelper):
+    ...
+    fields = [
+        ...
+        {
+            'key': 'name',
+            'label': 'Name',
+            'order_by': 'name',
+        },
+        {
+            'key': 'added',
+            'label': 'Added at',
+            'order_by': 'added',
+        },
+        {
+            'key': 'read',
+            'label': 'Read',
+            'template': '<% if (entry.get(\'read\') == true) { %>x<% } %>',
+            'order_by': 'read',
+        },
+    ]
+
+```
 
 ### Filtering
 
-coming soon...
+Add filters to your tastypie `ModelResource` and change filter parameters via javascript:
+
+```python
+class BookResource(ModelResource):
+    class Meta:
+    	...
+        filtering = {
+            'read': ['exact'],
+        }
+```
+
+```html
+<label class="checkbox">
+  <input type="checkbox" id="filter-read"> Show unread books only
+</label>
+{{ book_table.render_html }}
+...
+<script type="text/javascript">
+    {{ book_table.render_js }}
+
+    $('#filter-read').click(function(event){
+        if ($(this).is(':checked')) {
+            $.extend({{ book_table.uid }}.parameters, {'read': 'false'});
+        } else {
+            delete {{ book_table.uid }}.parameters.read;
+            delete {{ book_table.uid }}.entries.filters.read;
+        }
+        {{ book_table.uid }}.render();
+    });
+</script>
+```
