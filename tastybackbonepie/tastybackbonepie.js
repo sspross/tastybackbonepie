@@ -58,7 +58,9 @@
 
 	$.fn.renderTastyBackbonePieTable = function(settings) {
         
-        var element = this;
+        var element = this,
+            template = settings.tpl_pagination || HTML_TEMPLATE,
+            template_error = settings.template_error || ERROR_TEMPLATE;
 
         element.collection = Backbone.Tastypie.Collection.extend({
             urlRoot: settings.root_url,
@@ -74,7 +76,7 @@
                 var that = this;
                 return {
                     success: function(entries){
-                        var t = _.template(HTML_TEMPLATE, {
+                        var t = _.template(template, {
                             id: settings.uid,
                             fields: settings.fields, 
                             additional_html_fields: settings.additional_html_fields,
@@ -88,7 +90,7 @@
                     error: function(model, response){
                         var json = JSON.parse(response.responseText);
                         var message = json.error || json.error_message || 'Error';
-                        var t = _.template(ERROR_TEMPLATE, {message: message});
+                        var t = _.template(template_error, {message: message});
                         $(that.al).html(t);
                     }
                 }
