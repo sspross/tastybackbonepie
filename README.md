@@ -209,4 +209,4 @@ var book_table_settings = {
 ### History
 
 - 2013-03-16 Rewritten in javascript as jQuery plugin. 
-- 2013-03-15 First version was implemented server side as a Django app, still available [here](tree/django-app-implementation), but not further developed.
+- 2013-03-15 First version was implemented server side as a Django app, still available [here](../../tree/django-app-implementation), but not further developed.
