@@ -186,9 +186,9 @@ class BookResource(ModelResource):
 
     $('#filter-read').click(function(event){
         if ($(this).is(':checked')) {
-            book_table.extend_parameters({'read': 'false'});
+            book_table.setParameter('read', 'false'); // you can also use book_table.extendParameters({'read': 'false'});
         } else {
-            book_table.remove_parameter('read')
+            book_table.removeParameter('read')
         }
         book_table.render();
     });
@@ -197,7 +197,7 @@ class BookResource(ModelResource):
 
 ### Use own templates
 
-Set `template` and/or `template_error` in your settings:
+Set `template` and/or `template_error` in your settings. Take a look at the [default templates](tastybackbonepie/tastybackbonepie.js).
 
 ```javascript
 var book_table_settings = {
@@ -205,3 +205,8 @@ var book_table_settings = {
     template = '',
     template_error = ''
 ```
+
+### History
+
+- 2013-03-16 Rewritten in javascript as jQuery plugin. 
+- 2013-03-15 First version was implemented server side as a Django app, still available [here](tree/django-app-implementation), but not further developed.
