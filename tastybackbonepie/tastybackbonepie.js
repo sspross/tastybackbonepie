@@ -43,7 +43,7 @@
                         	</td> \
                 		<% }) %> \
                 		<% _.each(additional_html_fields, function(additional_html_field) { %> \
-                        	<td><%= additional_html_field %></td> \
+                        	<td><%= _.template(additional_html_field, {entry: entry}) %></td> \
                         <% }) %> \
                     </tr> \
                 <% }) %> \
