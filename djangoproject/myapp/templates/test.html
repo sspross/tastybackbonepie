@@ -42,9 +42,9 @@
 
     $('#filter-read').click(function(event){
         if ($(this).is(':checked')) {
-            book_table.extend_parameters({'read': 'false'});
+            book_table.setParameter('read', 'false'); // you can also use book_table.extendParameters({'read': 'false'});
         } else {
-            book_table.remove_parameter('read')
+            book_table.removeParameter('read')
         }
         book_table.render();
     });

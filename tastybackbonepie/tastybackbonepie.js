@@ -132,10 +132,13 @@
                 }
                 this.render();
             },
-            extend_parameters: function(parameters){
+            extendParameters: function(parameters){
                 _.extend(this.parameters, parameters);
             },
-            remove_parameter: function(key){
+            setParameter: function(key, value){
+                this.parameters[key] = value;
+            },
+            removeParameter: function(key){
                 delete this.parameters[key];
                 delete this.entries.filters[key];
             }
