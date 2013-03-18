@@ -1,0 +1,3 @@
+psycopg2==2.4.6
+dj-database-url==0.2.1
+--requirement REQUIREMENTS
