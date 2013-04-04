@@ -44,6 +44,7 @@ Maybe it works with other versions too, but atm it is tested with:
 0. Add API to your `urls.py` file:
 
 	```python
+    from django.conf.urls.defaults import patterns, include
 	from tastypie.api import Api
 	from myapp.api import BookResource
 
