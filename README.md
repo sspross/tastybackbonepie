@@ -1,9 +1,9 @@
 # TastyBackbonePie
 
-jQuery plugin to create ajax data tables using a [django-tastypie](http://tastypieapi.org/) api backend.
+Javascript class to create ajax data tables using a [django-tastypie](http://tastypieapi.org/) api backend.
 Includes a way to easily paginate, sort and filter tables too.
 
-__Version 0.1 alpha - This project is in a very early stage.__
+__Version 0.2 alpha - This project is in a very early stage.__
 
 ![Screenshot](docs/screenshot.png)
 
@@ -70,7 +70,7 @@ Now you should be able to access your ressource over your API like `/api/v1/book
 <script type="text/javascript">
     var book_table_settings = {
         uid: 'book_table',
-        root_url: '/api/v1/book/',
+        url: '/api/v1/book/',
         fields: [
             {
                 'key': 'id',
@@ -91,7 +91,7 @@ Now you should be able to access your ressource over your API like `/api/v1/book
         ]
     };
 
-    var book_table = $('#book-table').renderTastyBackbonePieTable(book_table_settings);
+    var book_table = new TastyBackbonePieTable(document.getElementById('book-table'), book_table_settings);
 </script>
 ```
 
@@ -115,13 +115,13 @@ var book_table_settings = {
 
 ### Additional HTML fields
 
-Add `additional_html_fields` to your settings and add string values cointaining html to it. 
+Add `additionalHtmlFields` to your settings and add string values cointaining html to it. 
 You can use underscore template syntax and the `entry` object to access your field values.
 
 ```javascript
 var book_table_settings = {
 	...
-	additional_html_fields = [
+	additionalHtmlFields = [
 		'<a class="btn" role="button" href="#" data-id="<%= entry.get(\'id\') %>"><i class="icon-trash"></i></a>',
 	]
 	...
@@ -182,7 +182,7 @@ class BookResource(ModelResource):
 ...
 <script type="text/javascript">
 	...
-    var book_table = $('#book-table').renderTastyBackbonePieTable(book_table_settings);
+    var book_table = new TastyBackbonePieTable(document.getElementById('book-table'), book_table_settings);
 
     $('#filter-read').click(function(event){
         if ($(this).is(':checked')) {
@@ -197,16 +197,18 @@ class BookResource(ModelResource):
 
 ### Use own templates
 
-Set `template` and/or `template_error` in your settings. Take a look at the [default templates](tastybackbonepie/tastybackbonepie.js).
+Set `tableTemplate`, `paginationTemplate` and/or `errorTemplate` in your settings. Take a look at the [default templates](tastybackbonepie/tastybackbonepie.js).
 
 ```javascript
 var book_table_settings = {
     ...
-    template = '',
-    template_error = ''
+    tableTemplate = '...',
+    paginationTemplate = '...',
+    errorTemplate = '...'
 ```
 
 ### History
 
+- 2013-04-18 Rewritten as plain javascript class, depending on jQuery
 - 2013-03-16 Rewritten in javascript as jQuery plugin. 
 - 2013-03-15 First version was implemented server side as a Django app, still available [here](../../tree/django-app-implementation), but not further developed.

@@ -6,11 +6,12 @@
 <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.4.4/underscore-min.js"></script>
 <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/backbone.js/0.9.10/backbone-min.js"></script>
-<script type="text/javascript" src="{{ STATIC_URL }}tastybackbonepie/tastybackbonepie-min.js"></script>
+<script type="text/javascript" src="{{ STATIC_URL }}tastybackbonepie/backbone-tastypie.js"></script>
+<script type="text/javascript" src="{{ STATIC_URL }}tastybackbonepie/tastybackbonepie.js"></script>
 <script type="text/javascript">
     var book_table_settings = {
         uid: 'book_table',
-        root_url: '/api/v1/book/',
+        url: '/api/v1/book/',
         fields: [
             {
                 'key': 'id',
@@ -33,16 +34,16 @@
                 'order_by': 'read',
             },
         ],
-        additional_html_fields: [
+        additionalHtmlFields: [
             '<a class="btn btn-mini" href="#" data-id="<%= entry.get(\'id\') %>"><i class="icon-trash"></i></a>',
         ]
     };
 
-    var book_table = $('#book-table').renderTastyBackbonePieTable(book_table_settings);
+    var book_table = new TastyBackbonePieTable(document.getElementById('book-table'), book_table_settings);
 
     $('#filter-read').click(function(event){
         if ($(this).is(':checked')) {
-            book_table.setParameter('read', 'false'); // you can also use book_table.extendParameters({'read': 'false'});
+            book_table.setParameter('read', 'false');  // you can also use book_table.extendParameters({'read': 'false'});
         } else {
             book_table.removeParameter('read')
         }
