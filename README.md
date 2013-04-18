@@ -5,7 +5,7 @@ Javascript class to create ajax data tables using a [django-tastypie](http://tas
 Includes a way to easily:
 
 * [paginate](#paginating)
-* [sort](#sorting) 
+* [sort](#column-sorting) 
 * [filter](#filtering)
 
 tables too.
@@ -134,7 +134,7 @@ var book_table_settings = {
 	...
 ```
 
-### <a id="paginating"></a>Paginating
+### Paginating
 
 By default the pagination limit is set to 20. At the moment you can overwrite this default like this:
 
@@ -154,7 +154,7 @@ var book_table_settings = {
 ```
 
 
-### <a id="sorting"></a>Column sorting
+### Column sorting
 
 Add order fields in your tastypie `ModelResource` and set `order_by` on your fields.
 
@@ -190,7 +190,7 @@ var book_table_settings = {
 
 ```
 
-### <a id="filtering"></a>Filtering
+### Filtering
 
 Add filters to your tastypie `ModelResource` and change filter parameters via javascript:
 
