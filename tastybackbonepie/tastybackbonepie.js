@@ -1,4 +1,4 @@
-(function($){
+(function($, _, Backbone){
 
     window.TastyBackbonePieTable = function(element, options) {
         this.$element = element;
@@ -166,4 +166,4 @@
         }
     };
 
-})(window.jQuery);
+})(window.jQuery, window._, window.Backbone);
