@@ -1,7 +1,14 @@
 # TastyBackbonePie
 
 Javascript class to create ajax data tables using a [django-tastypie](http://tastypieapi.org/) api backend.
-Includes a way to easily paginate, sort and filter tables too.
+
+Includes a way to easily:
+
+* [paginate](#paginating)
+* [sort](#sorting) 
+* [filter](#filtering)
+
+tables too.
 
 __Version 0.2 alpha - This project is in a very early stage.__
 
@@ -127,7 +134,27 @@ var book_table_settings = {
 	...
 ```
 
-### Column sorting
+### <a id="paginating"></a>Paginating
+
+By default the pagination limit is set to 20. At the moment you can overwrite this default like this:
+
+```javascript
+Backbone.Tastypie['defaultLimit'] = 10;
+```
+
+Set this before creating new TastyBackbonePieTable instances.
+
+You can also easily show or hide the pagination bar at the top or bottom by overwriting `hasPaginationTop` and/or `hasPaginationBottom` in your table settings:
+
+```javascript
+var book_table_settings = {
+    ...
+    hasPaginationTop = false,
+    ...
+```
+
+
+### <a id="sorting"></a>Column sorting
 
 Add order fields in your tastypie `ModelResource` and set `order_by` on your fields.
 
@@ -163,7 +190,7 @@ var book_table_settings = {
 
 ```
 
-### Filtering
+### <a id="filtering"></a>Filtering
 
 Add filters to your tastypie `ModelResource` and change filter parameters via javascript:
 
