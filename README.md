@@ -16,7 +16,7 @@ __Version 0.2.1 alpha - This project is in a very early stage.__
 
 ## How to use
 
-You can also take a look at the source of the [django test project](/djangoproject).
+You can also take a look at the source of the [django test project](/sspross/tastybackbonepie-djangoproject).
 
 ### Requirements
 
