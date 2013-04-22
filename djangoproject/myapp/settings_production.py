@@ -9,7 +9,7 @@ DEPLOYMENT = {
     'git_remote': 'origin',
     'hosts': ['silvan.spross.ch'],
     'user': 'root',
-    'project': UNIQUE_PREFIX,
+    'project': 'djangoproject',
     'root': '/root/projects/%s' % UNIQUE_PREFIX,
     'celery_worker': '%s_celery' % UNIQUE_PREFIX,
     'rabbitmq_vhost': UNIQUE_PREFIX,

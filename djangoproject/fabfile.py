@@ -12,7 +12,6 @@ from fabric.decorators import hosts
 if "VIRTUAL_ENV" not in os.environ:
     raise Exception("$VIRTUAL_ENV not found.")
 
-
 def _setup_path(name):
     import sys
     sys.path.insert(0, '.')
@@ -26,7 +25,6 @@ def _setup_path(name):
     env.code_root = os.path.join(env.project_root, env.project_python)
     env.virtualenv_root = os.path.join(env.project_root, 'env')
     env.settings = '%(project)s.settings_%(environment)s' % env
-
 
 def bootstrap():
     """ initialize remote host environment (virtualenv, deploy, update) """
@@ -253,3 +251,9 @@ def freeze_requirements():
                 pkg = line.rstrip().split('==')[0]
                 os.system("pip freeze | grep -i ^" + pkg + "== >> REQUIREMENTS_frozen")
     os.system("mv REQUIREMENTS_frozen REQUIREMENTS")
+
+
+def production():
+    env.project_python = 'myapp'
+    _setup_path('production')
+
