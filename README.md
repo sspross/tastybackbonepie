@@ -129,7 +129,10 @@ You can use underscore template syntax and the `entry` object to access your fie
 var book_table_settings = {
 	...
 	additionalHtmlFields = [
-		'<a class="btn" role="button" href="#" data-id="<%= entry.get(\'id\') %>"><i class="icon-trash"></i></a>',
+        {
+            width: 'auto',  // or e.g. 100px
+            template: '<a class="btn" role="button" href="#" data-id="<%= entry.get(\'id\') %>"><i class="icon-trash"></i></a>'
+        }
 	]
 	...
 ```

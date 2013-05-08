@@ -37,7 +37,7 @@
                             </th> \
                         <% }) %> \
                         <% _.each(additional_html_fields, function(additional_html_field) { %> \
-                            <th></th> \
+                            <th width="<%= additional_html_field.width %>"></th> \
                         <% }) %> \
                     </tr> \
                     <% _.each(entries, function(entry) { %> \
@@ -52,7 +52,7 @@
                                 </td> \
                             <% }) %> \
                             <% _.each(additional_html_fields, function(additional_html_field) { %> \
-                                <td><%= _.template(additional_html_field, {entry: entry}) %></td> \
+                                <td><%= _.template(additional_html_field.template, {entry: entry}) %></td> \
                             <% }) %> \
                         </tr> \
                     <% }) %> \
