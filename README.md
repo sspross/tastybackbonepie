@@ -5,12 +5,13 @@ Javascript class to create ajax data tables using a [django-tastypie](http://tas
 Includes a way to easily:
 
 * [paginate](#paginating)
-* [sort](#column-sorting) 
+* [sort](#column-sorting)
 * [filter](#filtering)
 
 tables too.
 
 __Version 0.2.1 alpha - This project is in a very early stage.__
+__WARNING: Current version doesn't work with today's versions of Underscore and/or Backbone, see [#3](issues/2)__
 
 ![Screenshot](docs/screenshot.png)
 
@@ -122,7 +123,7 @@ var book_table_settings = {
 
 ### Additional HTML fields
 
-Add `additionalHtmlFields` to your settings and add string values cointaining html to it. 
+Add `additionalHtmlFields` to your settings and add string values cointaining html to it.
 You can use underscore template syntax and the `entry` object to access your field values.
 
 ```javascript
@@ -240,5 +241,5 @@ var book_table_settings = {
 ### History
 
 - 2013-04-18 Rewritten as plain javascript class, depending on jQuery
-- 2013-03-16 Rewritten in javascript as jQuery plugin. 
+- 2013-03-16 Rewritten in javascript as jQuery plugin.
 - 2013-03-15 First version was implemented server side as a Django app, still available [here](../../tree/django-app-implementation), but not further developed.
