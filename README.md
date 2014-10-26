@@ -12,7 +12,7 @@ tables too.
 
 __Version 0.2.1 alpha - This project is in a very early stage.__
 
-__WARNING: Current version doesn't work with today's versions of Underscore and/or Backbone, see [#3](https://github.com/sspross/tastybackbonepie/issues/2)__
+__WARNING: Current version doesn't work with today's versions of Underscore and/or Backbone, [see tclancys input](https://github.com/sspross/tastybackbonepie/issues/2)__
 
 ![Screenshot](docs/screenshot.png)
 
